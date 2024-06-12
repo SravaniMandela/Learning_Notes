@@ -1,5 +1,6 @@
  It is unknown how often the logs will be accessed or which logs will be accessed the most : use **s3 intelligent tiering**
- key_value + Initially, the data requirements will be around 1 GB and future growth is unknown. Requests can range from 0 to over 800 requests per second : **dynamo db and lambda**
+ key_value + Initially, the data requirements will be around 1 GB and future growth is unknown. Requests can range from 0 to over 800 requests per second :
+**dynamo db and lambda**
  highest availability and low operational complexity : **multi az and ASG**
  the middle tier uses EC2 instances and an Amazon SQS queue to process orders : to process it fastly use **Use Amazon EC2 Auto Scaling** to scale out the middle tier instances based on the SQS queue depth.
  A company is working with a strategic partner that has an application that must be able to send messages to one of the company’s Amazon SQS queues. The partner company has its own AWS account: grant the **sqs:SendMessage permission** to the partner’s AWS account.
