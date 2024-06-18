@@ -27,3 +27,13 @@ uploaded to Amazon S3 standard storage class are initially accessed frequently f
 highly resilient hybrid cloud architecture connecting an on-premises data center and AWS: Configure DX(direct connect) connections at multiple DX locations.
 
 Put the JSON documents in an Amazon S3 bucket. As documents arrive in the S3 bucket, create an AWS Lambda function that runs Python code to process them. Use Amazon Aurora DB clusters to store the results.
+
+A company has divested a single business unit and needs to move the AWS account owned by the business unit to another AWS Organization. How can this be achieved?**Migrate the account using the AWS Organizations console**
+
+multiple AWS accounts : Transit gateway
+
+block level storage and millions of req per sec : ec2 instance store
+
+milli second retrieval : dynamodb
+
+instances inside vpc should not access internet : Configure the route table for the private subnet so that it routes the outbound traffic to an AWS Network Firewall firewall then configure domain list rule groups.
