@@ -1,5 +1,7 @@
 Amazon FSx for Windows File Server can integrate with Microsoft active directory
 
+• An instance can NOT be hibernated more than 60 days
+
 MPI PROTOCOL : parallel processes (AWS BATCH)
 
 With AWS Batch multi-node parallel jobs, you can run large-scale, tightly coupled, high performance computing applications and distributed GPU model training without the need to launch, configure, and manage Amazon EC2 resources directly.
