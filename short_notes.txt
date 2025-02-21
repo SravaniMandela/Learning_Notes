@@ -1,0 +1,63 @@
+pod
+multi pods - helper contaiers in same pod
+main container del ayipothe pod automatic ga helper container ni del chesthadhi
+service account>>dep>>replicaset>>nodes>>pods
+readiness probe: if pod external service(rds) ki connect avvali. ah external service ki connect ayye varaku eh request
+                 ni access/serve cheyakapovadame readiness probe (ready to serve the traffic or not)
+liveliness probe: whether a pod is healthy or not
+replication controller/set - creates replica if crashed
+deployments(stateless)- updates instances using rolling updates
+image required to create a container
+recreate::rolling update
+why service-unlike pod, service provides static ip
+
+architecture
+services
+pdb - maintains min of pods - avoids node destruction
+taints & tolerations: a taint is always placed on master node so that no pod gets placed in master
+taints: if a taint is attached to a node then it stops all pods to enter that node
+toleration: if specific pod wanna enter into tainted node then a tolerance should be attached to pod.
+scenario: if 5nodes unnayi frontend pods only first 2 nodes loki matrame povali and ah 2 nodes loki only frontend
+pods matrame vellaki - add taint to first 2 nodes and tolerance to frontend pods (and) node affinity to frontend pods
+then ah pods only ah nodes loki matrame velthayi.
+
+404/400 - ?
+403 while accesssing object in s3 while hosting:
+    disable public access
+    add bucket policy
+ReplicaSet: Ensures a specific number of pod replicas.
+Deployment: Manages ReplicaSets and adds rolling updates, rollbacks, etc.
+statefulset: manages stateful resources. it manages 3 things
+1)unique network identity  2)persistent storage  3)ordered deployment
+statefulset pod ordering: pod deploy in a specific order and pods shutdown in reverse order
+replication controller: replicaset: one major diff is selector:matchlabels is req in replicaset and not a req field in
+rep controller. when the pod is down replicaset will monitor the pod based on matchlabel and selectors
+what links the pods to service? - pod labels (just add pod labels in service-def.yml)
+(3 pods ki same label unte ahh anni pods ni service attach chesukuntadhi)
+
+Each container has its on own resource requests and limits.
+static pods: /etc/manifest/ ee common shared path lo pod files unte dhaanni base cheskoni kubelet pods create chesthadhi vaatine static pods antaru, if u del that file 
+from shared path then pod gets deleted automatically.
+admission contollers: there will be many controller inside this. for ex: ALWAYSPULLSIMAGES,NamespaceExists(kubectl create -f nginx.yaml)(checks whether namespace exists or not and then creates)
+ 
+to view a file inside container to see logs: kubectl -n elastic-stack exec -it app -- cat /log/app.log
+
+init container:
+initContainer must run to a completion before the real container hosting the application starts. 
+You can configure multiple such initContainers as well, like how we did for multi-containers pod. In that case each init container is run one at a time in sequential order.
+If any of the initContainers fail to complete, Kubernetes restarts the Pod repeatedly until the Init Container succeeds.
+
+cordon: simply marks a node unschedulable
+uncardon: makes a node schedulable(kubectl uncordon node)
+drain: to drain a node means all pods inside that node moves to other nodes technically they are not moved coz when a 
+node is drained all pods gets terminated and created in other nodes(kubectl drain node)
+
+while upgrading the software version etcd cluster and core dns have their own diff versions whereas kube-apiserver, ctrl-manager,
+schedular, kubelet, kube-proxy, kubectl has same version. 
+
+how the upgrade goes - 1 node down then ah node lo unde pods moves to other nodes and upgrade the node now (drain,uncordon and upgrade)
+kubectl get all --all-namespaces -o yaml >> all.yaml
+etcd is kind of database so we can snapshot it for backup
+
+symmetric encryption: sending encrypted data and key through medium to server (chance of attacker stealing the key)
+assymmetric: private key(only vth u) and public lock vesi data ni through medium server ki pampistham. so that nobody can steal it coz ahh lock ni ah private key tho matrame open cheyagalam
